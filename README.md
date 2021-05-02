@@ -5,7 +5,7 @@
   - [Usage](#usage)
   - [Changelog](#changelog)
 
-Simple Joomla component to enable users to mark articles as 'read'.
+Simple Joomla plugin to enable users to mark articles as 'read'.
 
 ## About
 
@@ -35,7 +35,11 @@ TODO
 ### [Unreleased] <!-- omit in toc -->
 
 #### Added <!-- omit in toc -->
+
 - Added `About` section in README
+- Added several blank `index.html` files to prevent directory index
+- Added language files
+- Added boilerplate Joomla plugin manifest file
 
 #### Changed <!-- omit in toc -->
 

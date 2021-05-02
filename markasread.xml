@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.1" type="plugin" group="content" method="upgrade">
+
+  <name>Content - BriteBlu - Mark as Read</name>
+  <!-- <name>plg_content_briteblu_markasread</name> -->
+
+  <!-- The following elements are optional and free of formatting constraints -->
+  <creationDate>30-04-2021</creationDate>
+  <author>B. van Wetten (BriteBlu)</author>
+  <authorEmail>info@briteblu.com</authorEmail>
+  <authorUrl>https://briteblu.com</authorUrl>
+  <copyright>(C) 2021 BriteBlu. All rights reserved.</copyright>
+  <license>MIT; see LICENSE</license>
+
+  <!--  The version string is recorded in the plugins table -->
+  <version>0.0.1</version>
+
+  <languages folder="language">
+    <language tag="en-GB">en-GB/en-GB.plg_content_markasread.ini</language>
+    <language tag="en-GB">en-GB/en-GB.plg_content_markasread.sys.ini</language>
+  </languages>
+
+  <!-- The description is optional and defaults to the name -->
+  <description>PLG_CONTENT_BRITEBLU_MARKASREAD_PROFILE_XML_DESCRIPTION</description>
+  <files>
+    <filename plugin="markasread">markasread.php</filename>
+    <filename>index.html</filename>
+    <folder>language</folder>
+  </files>
+
+  <!-- <updateservers>
+    <server type="extension" priority="1" name="BriteBluMarkAsReadUpdateServer">https://briteblu.com/joomla/markasread_update.xml</server>
+  </updateservers> -->
+</extension>
