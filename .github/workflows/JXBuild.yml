@@ -1,8 +1,8 @@
 ---
   name: JXBuild
-  # on:
-  #   push:
-  #     branches: [ main, dev ]
+  on:
+    push:
+      branches: [ disabled ]
   jobs:
     jxbuild:
       runs-on: ubuntu-latest
