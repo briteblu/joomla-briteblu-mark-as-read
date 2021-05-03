@@ -40,6 +40,9 @@ TODO
 - Added several blank `index.html` files to prevent directory index
 - Added language files
 - Added boilerplate Joomla plugin manifest file
+- Added boilerplate installer script
+- Added boilerplate plugin script
+- Added install/update/uninstall SQL scripts for MySQL database
 
 #### Changed <!-- omit in toc -->
 

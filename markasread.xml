@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="3.1" type="plugin" group="content" method="upgrade">
+<extension version="3.8" type="plugin" group="content" method="upgrade">
 
   <name>Content - BriteBlu - Mark as Read</name>
   <!-- <name>plg_content_briteblu_markasread</name> -->
@@ -9,12 +9,13 @@
   <author>B. van Wetten (BriteBlu)</author>
   <authorEmail>info@briteblu.com</authorEmail>
   <authorUrl>https://briteblu.com</authorUrl>
-  <copyright>(C) 2021 BriteBlu. All rights reserved.</copyright>
+  <copyright>(C) 2021 BriteBlu</copyright>
   <license>MIT; see LICENSE</license>
 
   <!--  The version string is recorded in the plugins table -->
   <version>0.0.1</version>
 
+  <!-- Language files -->
   <languages folder="language">
     <language tag="en-GB">en-GB/en-GB.plg_content_markasread.ini</language>
     <language tag="en-GB">en-GB/en-GB.plg_content_markasread.sys.ini</language>
@@ -25,9 +26,35 @@
   <files>
     <filename plugin="markasread">markasread.php</filename>
     <filename>index.html</filename>
+    <folder>sql</folder>
     <folder>language</folder>
   </files>
 
+  <!-- Scripts to run on installation -->
+  <scriptfile>markasread.installer.php</scriptfile>
+
+  <!-- Runs on install -->
+  <install>
+    <sql>
+      <file driver="mysql" charset="utf8">sql/install/mysql/mysql.sql</file>
+    </sql>
+  </install>
+
+  <!-- Runs on update -->
+  <update>
+    <schemas>
+      <schemapath type="mysql">sql/updates/mysql</schemapath>
+    </schemas>
+  </update>
+
+  <!-- Runs on uninstall -->
+  <uninstall>
+    <sql>
+      <file driver="mysql" charset="utf8">sql/uninstall/mysql/mysql.sql</file>
+    </sql>
+  </uninstall>
+
+  <!-- Update servers -->
   <!-- <updateservers>
     <server type="extension" priority="1" name="BriteBluMarkAsReadUpdateServer">https://briteblu.com/joomla/markasread_update.xml</server>
   </updateservers> -->
