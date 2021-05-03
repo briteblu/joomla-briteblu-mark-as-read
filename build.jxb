@@ -1,0 +1,9 @@
+# First, delete the com_example.zip file
+DELETE:plg_example.zip
+# Then, zip the com_example directory
+ZIPDIR:.
+# Same for our module
+#DELETE:mod_example.zip
+#ZIPDIR:mod_example
+# Then, create a package zip file adding a pkg_example.xml file and the zips we just created
+ZIPFILES:pkg_example.zip pkg_example.xml plg_example.zip

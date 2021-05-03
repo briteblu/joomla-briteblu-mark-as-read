@@ -3,6 +3,7 @@
 - [BriteBlu - 'Mark as Read' Joomla component](#briteblu---mark-as-read-joomla-component)
   - [About](#about)
   - [Usage](#usage)
+  - [To Do](#to-do)
   - [Changelog](#changelog)
 
 Simple Joomla plugin to enable users to mark articles as 'read'.
@@ -30,6 +31,10 @@ Questions on behavior and details of this component can be sent to [BriteBlu](ht
 
 TODO
 
+## To Do
+
+- Fix github workflow `JXBuild`
+
 ## Changelog
 
 ### [Unreleased] <!-- omit in toc -->
@@ -43,6 +48,9 @@ TODO
 - Added boilerplate installer script
 - Added boilerplate plugin script
 - Added install/update/uninstall SQL scripts for MySQL database
+- Added `dependabot.yml` to `.github/`
+- Added `FUNDING.yml` to `.github/`
+- Added Joomla Extension Continuous Deployment Action as a GitHub workflow
 
 #### Changed <!-- omit in toc -->
 
