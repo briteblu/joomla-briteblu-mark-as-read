@@ -51,6 +51,7 @@ TODO
 - Added `dependabot.yml` to `.github/`
 - Added `FUNDING.yml` to `.github/`
 - Added Joomla Extension Continuous Deployment Action as a GitHub workflow
+- Added simple configuration option to plugin config
 
 #### Changed <!-- omit in toc -->
 

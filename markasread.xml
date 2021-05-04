@@ -22,7 +22,7 @@
   </languages>
 
   <!-- The description is optional and defaults to the name -->
-  <description>PLG_CONTENT_BRITEBLU_MARKASREAD_PROFILE_XML_DESCRIPTION</description>
+  <description>PLG_CONTENT_BRITEBLU_MARKASREAD_DESCRIPTION</description>
   <files>
     <filename plugin="markasread">markasread.php</filename>
     <filename>index.html</filename>
@@ -53,6 +53,21 @@
       <file driver="mysql" charset="utf8">sql/uninstall/mysql/mysql.sql</file>
     </sql>
   </uninstall>
+
+  <!-- Config parameters -->
+  <config>
+    <fields name="params">
+      <fieldset name="basic">
+        <field
+          name="sample"
+          type="text"
+          default="42"
+          label="PLG_CONTENT_BRITEBLU_MARKASREAD_CONFIG_SAMPLE_LABEL"
+          description="PLG_CONTENT_BRITEBLU_MARKASREAD_CONFIG_SAMPLE_DESCRIPTION"
+        />
+      </fieldset>
+    </fields>
+  </config>
 
   <!-- Update servers -->
   <!-- <updateservers>
