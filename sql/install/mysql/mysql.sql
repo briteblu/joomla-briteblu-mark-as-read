@@ -5,11 +5,11 @@
 -- --------------------------------------------------------
 
 --
--- Table structure for table `#__briteblu_markasread`
+-- Table structure for table `#__markasread`
 --
 
-DROP TABLE IF EXISTS `#__briteblu_markasread`;
-CREATE TABLE `#__briteblu_markasread` (
+DROP TABLE IF EXISTS `#__markasread`;
+CREATE TABLE `#__markasread` (
   `id` int(10) UNSIGNED NOT NULL,
   `content_id` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'FK to the #__content table.',
   `user_id` int(11) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'FK to the #__users table.',
@@ -22,9 +22,9 @@ CREATE TABLE `#__briteblu_markasread` (
 --
 
 --
--- Indexes for table `#__briteblu_markasread`
+-- Indexes for table `#__markasread`
 --
-ALTER TABLE `#__briteblu_markasread`
+ALTER TABLE `#__markasread`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE INDEX `idx_user_content` (`user_id`, `content_id`);
 
@@ -33,9 +33,9 @@ ALTER TABLE `#__briteblu_markasread`
 --
 
 --
--- AUTO_INCREMENT for table `#__briteblu_markasread`
+-- AUTO_INCREMENT for table `#__markasread`
 --
-ALTER TABLE `#__briteblu_markasread`
+ALTER TABLE `#__markasread`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   MODIFY `created` datetime DEFAULT CURRENT_TIMESTAMP,
   MODIFY `modified` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;

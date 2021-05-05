@@ -55,6 +55,11 @@ TODO
 
 #### Changed <!-- omit in toc -->
 
+- Set minimum Joomla version for `markasread` plugin from `3.8` to `3.1`
+- Renamed `markasread.xml` to `manifest.xml`
+- Renamed plugin
+- First implementation of `markasread` plugin logic to determine if article was read
+
 ### [v0.0.1] - 2021-04-29 <!-- omit in toc -->
 
 #### Added <!-- omit in toc -->
