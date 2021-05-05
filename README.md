@@ -39,6 +39,8 @@ TODO
 
 ### [Unreleased] <!-- omit in toc -->
 
+### [v0.0.2] - 2021-05-059 <!-- omit in toc -->
+
 #### Added <!-- omit in toc -->
 
 - Added `About` section in README
@@ -65,4 +67,6 @@ TODO
 #### Added <!-- omit in toc -->
 - Initial version of `joomla-briteblu-mark-as-read` repository
 
+[Unreleased]: https://github.com/briteblu/joomla-briteblu-mark-as-read/compare/v0.0.2...HEAD
+[v0.0.2]: https://github.com/briteblu/joomla-briteblu-mark-as-read/releases/tag/v0.0.2
 [v0.0.1]: https://github.com/briteblu/joomla-briteblu-mark-as-read/releases/tag/v0.0.1
