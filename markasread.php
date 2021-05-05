@@ -66,10 +66,16 @@ class PlgContentMarkAsRead extends JPlugin
     $this->_plugin = JPluginHelper::getPlugin('content', self::PLUGIN_NAME);
     $this->_params = new JRegistry($this->_plugin->params);
 
+		// Init folder structure
+		$this->_initFolders();
+
     // Add current user id to plugin parameters
     $this->_params->user_id = Factory::getUser()->id;
 
-    // $this->votingPosition = $this->params->get('position', 'top');
+    // Load plugin css & scripts
+    $document = Factory::getDocument();
+    $document->addStyleSheet($this->_urlPluginCss . "/style.css", array('version'=>'auto'));
+    $document->addScript($this->_urlPluginJs . "/script.js", array(), array());
   }
 
   /**
@@ -138,59 +144,72 @@ class PlgContentMarkAsRead extends JPlugin
   }
 
   /**
+   * Helper method that modfies article content if required
+   *
+   * @param   object   &$article  An object with a "text" property or the string to be cloaked.
+   * @param   mixed    &$params   Additional parameters. See {@see PlgContentEmailcloak()}.
+   *
+   * @return  mixed    true if there is an error. Void otherwise.
+   */
+  private function _modifyContent(&$article, &$params)
+  {
+    return;
+  }
+  /**
    * Display mark as read toggle
    *
-   * @param   string   $context  The context of the content being passed to the plugin
-   * @param   object   &$row     The article object
-   * @param   object   &$params  The article params
-   * @param   integer  $page     The 'page' number
+   * @param   string   $context   The context of the content being passed to the plugin
+   * @param   object   &$article  The article object
+   * @param   object   &$params   The article params
+   * @param   integer  $page      The 'page' number
    *
    * @return  string|boolean  HTML string containing code for the mark as read toggle if in com_content else boolean false
-   *
-   * @since   3.7.0
    */
-  private function _displayMarkAsRead($context, &$row, &$params, $page)
+  private function _displayMarkAsRead($context, &$article, &$params, $page)
   {
-    return '';
+    // Get the path for the rating summary layout file
+    $path = JPluginHelper::getLayoutPath('content', 'markasread', 'read');
 
-    // // Load plugin language files only when needed (ex: they are not needed if show_vote is not active).
-    // $this->loadLanguage();
+    // Render the layout and wrap inside container div
+    ob_start();
+    include $path;
+    $html = '<div id="joomla_plugin_content_markasread_container">' . ob_get_clean();
 
-    // // Get the path for the rating summary layout file
-    // $path = JPluginHelper::getLayoutPath('content', 'vote', 'rating');
-
-    // // Render the layout
-    // ob_start();
-    // include $path;
-    // $html = ob_get_clean();
-
-    // if ($this->app->input->getString('view', '') === 'article' && $row->state == 1)
-    // {
-    //   // Get the path for the voting form layout file
-    //   $path = JPluginHelper::getLayoutPath('content', 'vote', 'vote');
-
-    //   // Render the layout
-    //   ob_start();
-    //   include $path;
-    //   $html .= ob_get_clean();
-    // }
-
-    // return $html;
+    return $html;
   }
 
   /**
    * TODO: Description
    *
-   * @param   string   $context  The context of the content being passed to the plugin
-   * @param   object   &$row     The article object
-   * @param   object   &$params  The article params
-   * @param   integer  $page     The 'page' number
+   * @param   string   $context   The context of the content being passed to the plugin
+   * @param   object   &$article  The article object
+   * @param   object   &$params   The article params
+   * @param   integer  $page      The 'page' number
    *
-   * @return  string|boolean  HTML string containing code if in com_content else boolean false
-   *
-   * @since   1.6
+   * @return  string|boolean  HTML string containing code if valid context else boolean false
    */
-  public function onContentBeforeDisplay($context, &$row, &$params, $page = 0)
+  public function onContentBeforeDisplay($context, &$article, &$params, $page = 0)
+  {
+    // Validate context
+    if (!$this->_validateContext($context))
+    {
+      return false;
+    }
+
+    return $this->_displayMarkAsRead($context, $article, $params, $page);
+  }
+
+  /**
+   * TODO: Description
+   *
+   * @param   string   $context   The context of the content being passed to the plugin
+   * @param   object   &$article  The article object
+   * @param   object   &$params   The article params
+   * @param   integer  $page      The 'page' number
+   *
+   * @return  string|boolean  HTML string containing code if valid context else boolean false
+   */
+  public function onContentAfterDisplay($context, &$article, &$params, $page = 0)
   {
     // Validate context
     if (!$this->_validateContext($context))
@@ -198,61 +217,41 @@ class PlgContentMarkAsRead extends JPlugin
       return;
     }
 
-    return $this->_displayMarkAsRead($context, $row, $params, $page);
-  }
-
-  /**
-   * TODO: Description
-   *
-   * @param   string   $context  The context of the content being passed to the plugin
-   * @param   object   &$row     The article object
-   * @param   object   &$params  The article params
-   * @param   integer  $page     The 'page' number
-   *
-   * @return  string|boolean  HTML string containing code if in com_content else boolean false
-   *
-   * @since   3.7.0
-   */
-  public function onContentAfterDisplay($context, &$row, &$params, $page = 0)
-  {
-    return false;
+    return '</div>';
   }
   
   /**
-   * TODO: Description
+   * Plugin that loads module positions within content
    *
-   * @param   string   $context  The context of the content being passed to the plugin.
-   * @param   mixed    &$row     An object with a "text" property or the string to be cloaked.
-   * @param   mixed    &$params  Additional parameters. See {@see PlgContentEmailcloak()}.
-   * @param   integer  $page     Optional page number. Unused. Defaults to zero.
+   * @param   string   $context   The context of the content being passed to the plugin.
+   * @param   object   &$article  An object with a "text" property or the string to be cloaked.
+   * @param   mixed    &$params   Additional parameters. See {@see PlgContentEmailcloak()}.
+   * @param   integer  $page      Optional page number. Unused. Defaults to zero.
    *
-   * @return  boolean	True on success.
+   * @return  mixed    true if there is an error. Void otherwise.
    */
   public function onContentPrepare($context, &$article, &$params, $page = 0)
   {
-    // // Validate context
-    // if (!$this->_validateContext($context))
-    // {
-    //   return;
-    // }
+    // Validate context
+    if (!$this->_validateContext($context))
+    {
+      return;
+    }
 
     if ($this->_debug()) {
-      $hasBeenRead = $this->_hasBeenRead($params, $article->id, $this->_params->user_id);
-      if ($hasBeenRead) {
+      $this->_hasBeenRead = $this->_hasBeenRead($params, $article->id, $this->_params->user_id);
+      if ($this->_hasBeenRead) {
         JFactory::getApplication()->enqueueMessage('DEBUG :: Article has been read');
       } else {
         JFactory::getApplication()->enqueueMessage('DEBUG :: Article has not been read');
       }
     }
-
-
     
+    if (is_object($article))
+    {
+      return $this->_modifyContent($article->text, $params);
+    }
 
-    // if (is_object($article))
-    // {
-    //   return $this->modifyContent($article->text, $params);
-    // }
-
-    // return $this->modifyContent($article, $params);
+    return $this->_modifyContent($article, $params);
   }
 }

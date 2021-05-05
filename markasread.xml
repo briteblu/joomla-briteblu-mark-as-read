@@ -26,7 +26,10 @@
   <files>
     <filename plugin="markasread">markasread.php</filename>
     <filename>index.html</filename>
+    <folder>js</folder>
+    <folder>css</folder>
     <folder>sql</folder>
+    <folder>tmpl</folder>
     <folder>language</folder>
   </files>
 
@@ -60,10 +63,12 @@
       <fieldset name="basic">
         <field
           name="debug"
-          type="list"
+          type="radio"
+          class="btn-group"
           default="disabled"
           label="PLG_CONTENT_MARKASREAD_CONFIG_DEBUG_LABEL"
           description="PLG_CONTENT_MARKASREAD_CONFIG_DEBUG_DESCRIPTION"
+          labelclass="control-label"
         >
           <option value="disabled">PLG_CONTENT_MARKASREAD_CONFIG_DEBUG_OPTION_DISABLED</option>
 					<option value="enabled">PLG_CONTENT_MARKASREAD_CONFIG_DEBUG_OPTION_ENABLED</option>

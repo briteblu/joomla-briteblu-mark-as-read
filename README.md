@@ -43,10 +43,13 @@ TODO
 
 - Added debug option in plugin configuration
 - Some cleanup in main plugin file (added doc comments, renamed private method, etc)
+- Added `js` and `css` folders and files
+- Added frontend plugin template `tmpl/read.php`
+- Changed debug option from list select to radio button group
 
 #### Changed <!-- omit in toc -->
 
-### [v0.0.2] - 2021-05-059 <!-- omit in toc -->
+### [v0.0.2] - 2021-05-05 <!-- omit in toc -->
 
 #### Added <!-- omit in toc -->
 

@@ -1,0 +1,28 @@
+#joomla_plugin_content_markasread_container {
+  position: relative;
+  
+  overflow: hidden;
+}
+
+#joomla_plugin_content_markasread_container .container__corner {
+  position: absolute;
+}
+
+#joomla_plugin_content_markasread_container .container__corner--tr {
+  top: -32px;
+  right: -32px;
+  width: 64px;
+  height: 64px;
+  
+  background-color: rgba(30, 130, 30, 1);
+  
+  box-shadow: -10px 11px 11px -6px rgb(0 0 0 / 64%);
+  -webkit-box-shadow: -10px 11px 11px -6px rgb(0 0 0 / 64%);
+  -moz-box-shadow: -10px 11px 11px -6px rgba(0,0,0,0.64);
+  
+  transform: rotate(-45deg);
+}
+
+#joomla_plugin_content_markasread_container form .btn {
+  margin: 0px 20px;
+}
