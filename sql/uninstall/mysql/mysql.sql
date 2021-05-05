@@ -1,1 +1,1 @@
-DROP TABLE IF EXISTS `#__briteblu_markasread`;
+DROP TABLE IF EXISTS `#__markasread`;

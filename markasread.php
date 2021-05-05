@@ -1,201 +1,186 @@
 <?php
 /**
- * @package    BriteBluMarkAsRead
+ * @version     $Id: markasread.php 04-05-2021 B. van Wetten $
+ * @package     Joomla.Plugin
+ * @subpackage  Content.markasread
  *
- * @author     B. van Wetten <info@briteblu.com>
- * @copyright  2021 (c) BriteBlu.
- * @license    MIT; see LICENSE
- * @link       https://briteblu.com
+ * @author      B. van Wetten <info@briteblu.com>
+ * @copyright   2021 (c) BriteBlu.
+ * @license     MIT; see LICENSE
+ * @link        https://briteblu.com
  */
 
 defined('_JEXEC') or die;
 
-use Joomla\CMS\Application\CMSApplication;
-use Joomla\CMS\Plugin\CMSPlugin;
-use Joomla\Database\DatabaseDriver;
+use Joomla\CMS\Factory;
 
 /**
  * Plugin class
  *
- * @package   BriteBluMarkAsRead
+ * @package   MarkAsRead
  * @since     0.0.1
  */
-class plgContentBritebluMarkAsRead extends CMSPlugin
+class PlgContentMarkAsRead extends JPlugin
 {
-	/**
-	 * Application object
-	 *
-	 * @var    CMSApplication
-	 * @since  1.0.0
-	 */
-	protected $app;
-
-	/**
-	 * Database object
-	 *
-	 * @var    DatabaseDriver
-	 * @since  1.0.0
-	 */
-	protected $db;
-
-	/**
-	 * Affects constructor behavior. If true, language files will be loaded automatically.
-	 *
-	 * @var    boolean
-	 * @since  1.0.0
-	 */
-	protected $autoloadLanguage = true;
+  /**
+   * Affects constructor behavior. If true, language files will be loaded automatically.
+   *
+   * @var    boolean
+   * @since  1.0.0
+   */
+  protected $autoloadLanguage = true;
 
   /**
-	 * This is an event that is called right before the content is deleted.
-	 *
-	 * @param   string  $context  The context of the content passed to the plugin (added in 1.6).
-	 * @param   object  $article  A JTableContent object.
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
-	 */
-	public function onContentBeforeDelete($context, $article)
-	{
+   * Constructor.
+   *
+   * @param   object  &$subject  The object to observe
+   * @param   array   $config    An optional associative array of configuration settings.
+   *
+   * @since   3.7.0
+   */
+  public function __construct(&$subject, $config)
+  {
+    parent::__construct($subject, $config);
 
-	}
+    // $this->votingPosition = $this->params->get('position', 'top');
+  }
 
-	/**
-	 * This is an event that is called right after the content is deleted.
-	 *
-	 * @param   string  $context  The context of the content passed to the plugin (added in 1.6).
-	 * @param   object  $article  A JTableContent object.
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
-	 */
-	public function onContentAfterDelete($context, $article)
-	{
+  /**
+   * TODO: Description
+   *
+   * @param   string   $context  The context of the content being passed to the plugin
+   * @param   object   &$row     The article object
+   * @param   object   &$params  The article params
+   * @param   integer  $page     The 'page' number
+   *
+   * @return  string|boolean  HTML string containing code if in com_content else boolean false
+   *
+   * @since   1.6
+   */
+  public function onContentBeforeDisplay($context, &$row, &$params, $page = 0)
+  {
+    return $this->displayMarkAsRead($context, $row, $params, $page);
+  }
 
-	}
+  /**
+   * TODO: Description
+   *
+   * @param   string   $context  The context of the content being passed to the plugin
+   * @param   object   &$row     The article object
+   * @param   object   &$params  The article params
+   * @param   integer  $page     The 'page' number
+   *
+   * @return  string|boolean  HTML string containing code if in com_content else boolean false
+   *
+   * @since   3.7.0
+   */
+  public function onContentAfterDisplay($context, &$row, &$params, $page = 0)
+  {
+    return false;
+  }
+  
+  /**
+   * TODO: Description
+   *
+   * @param   string   $context  The context of the content being passed to the plugin.
+   * @param   mixed    &$row     An object with a "text" property or the string to be cloaked.
+   * @param   mixed    &$params  Additional parameters. See {@see PlgContentEmailcloak()}.
+   * @param   integer  $page     Optional page number. Unused. Defaults to zero.
+   *
+   * @return  boolean	True on success.
+   */
+  public function onContentPrepare($context, &$article, &$params, $page = 0)
+  {
+    // Don't run this plugin when the content is being indexed
+    if ($context === 'com_finder.indexer')
+    {
+      return true;
+    }
 
-	/**
-	 * This is a request for information that should be placed
-	 * immediately before the generated content.
-	 *
-	 * @param   string   $context  The context of the content being passed to the plugin.
-	 * @param   object   &$row     The article object.  Note $article->text is also available
-	 * @param   mixed    &$params  The article params
-	 * @param   integer  $page     The 'page' number
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
-	 */
-	public function onContentBeforeDisplay($context, &$row, &$params, $page=0)
-	{
+    $user = Factory::getUser();
 
-	}
+    $hasBeenRead = $this->_hasBeenRead($params, $article->id, $user->id);
+    if ($hasBeenRead) {
+      JFactory::getApplication()->enqueueMessage('Article has already been read');
+    } else {
+      JFactory::getApplication()->enqueueMessage('Article has not yet been read');
+    }
+    
 
-	/**
-	 * This is a request for information that should be placed immediately
-	 * after the generated content.
-	 *
-	 * @param   string   $context  The context of the content being passed to the plugin
-	 * @param   object   &$row     The article object
-	 * @param   object   &$params  The article params
-	 * @param   integer  $page     The 'page' number
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
-	 */
-	public function onContentAfterDisplay ($context, &$row, &$params, $page=0)
-	{
-		// Access to plugin parameters
-		$sample = $this->params->get('sample', '42');
-	}
+    // if (is_object($article))
+    // {
+    //   return $this->modifyContent($article->text, $params);
+    // }
 
-	/**
-	 * This is an event that is called right before the content
-	 * is saved into the database.
-	 *
-	 * @param   string  $context  The context of the content passed to the plugin (added in 1.6).
-	 * @param   object  $article  A JTableContent object.
-	 * @param   bool    $isNew    If the content is just about to be created.
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
-	 */
-	public function onContentBeforeSave($context, $article, $isNew)
-	{
+    // return $this->modifyContent($article, $params);
+  }
 
-	}
+  /**
+   * Display mark as read toggle
+   *
+   * @param   string   $context  The context of the content being passed to the plugin
+   * @param   object   &$row     The article object
+   * @param   object   &$params  The article params
+   * @param   integer  $page     The 'page' number
+   *
+   * @return  string|boolean  HTML string containing code for the mark as read toggle if in com_content else boolean false
+   *
+   * @since   3.7.0
+   */
+  private function displayMarkAsRead($context, &$row, &$params, $page)
+  {
+    JFactory::getApplication()->enqueueMessage($context);
+    $parts = explode('.', $context);
 
-	/**
-	 * This is an event that is called after the content is saved
-	 * into the database.
-	 *
-	 * @param   string  $context  The context of the content passed to the plugin (added in 1.6)
-	 * @param   object  $article  A JTableContent object
-	 * @param   bool    $isNew    If the content has just been created
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
-	 */
-	public function onContentAfterSave($context, $article, $isNew)
-	{
+    if ($parts[0] !== 'com_content' || $parts[1] !== 'article')
+    {
+      return false;
+    }
+    return '';
 
-	}
+    // // Load plugin language files only when needed (ex: they are not needed if show_vote is not active).
+    // $this->loadLanguage();
 
-	/**
-	 * This is a request for information that should be placed between the
-	 * content title and the content body.
-	 *
-	 * @param   string   $context  The context of the content being passed to the plugin.
-	 * @param   object   &$row     The article object.  Note $article->text is also available
-	 * @param   mixed    &$params  The article params
-	 * @param   integer  $page     The 'page' number
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
-	 */
-	public function onContentAfterTitle($context, &$row, &$params, $page = 0)
-	{
+    // // Get the path for the rating summary layout file
+    // $path = JPluginHelper::getLayoutPath('content', 'vote', 'rating');
 
-	}
+    // // Render the layout
+    // ob_start();
+    // include $path;
+    // $html = ob_get_clean();
 
-	/**
-	 * This is an event that is called when the contents state is changed.
-	 *
-	 * @param   string   $context  The context for the content passed to the plugin.
-	 * @param   array    $pks      A list of primary key ids of the content that has changed state.
-	 * @param   integer  $value    The value of the state that the content has been changed to.
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
-	 */
-	public function onContentChangeState($context, $pks, $value)
-	{
+    // if ($this->app->input->getString('view', '') === 'article' && $row->state == 1)
+    // {
+    //   // Get the path for the voting form layout file
+    //   $path = JPluginHelper::getLayoutPath('content', 'vote', 'vote');
 
-	}
+    //   // Render the layout
+    //   ob_start();
+    //   include $path;
+    //   $html .= ob_get_clean();
+    // }
 
-	/**
-	 * This is the first stage in preparing content for output and is the
-	 * most common point for content orientated plugins to do their work.
-	 *
-	 * @param   string   $context  The context of the content being passed to the plugin.
-	 * @param   object   &$row     The article object.  Note $article->text is also available
-	 * @param   mixed    &$params  The article params
-	 * @param   integer  $page     The 'page' number
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
-	 */
-	public function onContentPrepare($context, &$row, &$params, $page = 0)
-	{
+    // return $html;
+  }
 
-	}
+  private static function _hasBeenRead(&$params, $article_id, $user_id)
+  {
+    $db = JFactory::getDbo();
+    $query = $db->getQuery(true);
+    $query->select('COUNT(*)');
+    $query->from('#__markasread');
+    $query->where($db->quoteName('content_id') . ' = '. (int)$article_id);
+    $query->where($db->quoteName('user_id') . ' = ' . (int)$user_id);
+    $db->setQuery($query);
+    try
+    {
+      $count = $db->loadResult();
+    }
+    catch (RuntimeException $e)
+    {
+      JError::raiseError(500, $e->getMessage());
+      return false;
+    }
+    return $count == 1;
+  }
 }
