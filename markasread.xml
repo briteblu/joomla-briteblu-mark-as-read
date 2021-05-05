@@ -59,12 +59,15 @@
     <fields name="params">
       <fieldset name="basic">
         <field
-          name="sample"
-          type="text"
-          default="42"
-          label="PLG_CONTENT_MARKASREAD_CONFIG_SAMPLE_LABEL"
-          description="PLG_CONTENT_MARKASREAD_CONFIG_SAMPLE_DESCRIPTION"
-        />
+          name="debug"
+          type="list"
+          default="disabled"
+          label="PLG_CONTENT_MARKASREAD_CONFIG_DEBUG_LABEL"
+          description="PLG_CONTENT_MARKASREAD_CONFIG_DEBUG_DESCRIPTION"
+        >
+          <option value="disabled">PLG_CONTENT_MARKASREAD_CONFIG_DEBUG_OPTION_DISABLED</option>
+					<option value="enabled">PLG_CONTENT_MARKASREAD_CONFIG_DEBUG_OPTION_ENABLED</option>
+        </field>
       </fieldset>
     </fields>
   </config>

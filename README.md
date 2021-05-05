@@ -39,6 +39,13 @@ TODO
 
 ### [Unreleased] <!-- omit in toc -->
 
+#### Added <!-- omit in toc -->
+
+- Added debug option in plugin configuration
+- Some cleanup in main plugin file (added doc comments, renamed private method, etc)
+
+#### Changed <!-- omit in toc -->
+
 ### [v0.0.2] - 2021-05-059 <!-- omit in toc -->
 
 #### Added <!-- omit in toc -->
