@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="3.1" type="plugin" group="content" method="upgrade">
 
-  <name>Content - BriteBlu - Mark as Read</name>
-  <!-- <name>plg_content_briteblu_markasread</name> -->
+  <name>BriteBlu Mark as Read plugin</name>
 
   <!-- The following elements are optional and free of formatting constraints -->
   <creationDate>30-04-2021</creationDate>
@@ -13,7 +12,7 @@
   <license>MIT; see LICENSE</license>
 
   <!--  The version string is recorded in the plugins table -->
-  <version>0.0.1</version>
+  <version>0.0.3</version>
 
   <!-- Language files -->
   <languages folder="language">
@@ -23,6 +22,7 @@
 
   <!-- The description is optional and defaults to the name -->
   <description>PLG_CONTENT_MARKASREAD_DESCRIPTION</description>
+
   <files>
     <filename plugin="markasread">markasread.php</filename>
     <filename>index.html</filename>

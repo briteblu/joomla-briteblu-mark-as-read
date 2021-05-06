@@ -2,17 +2,17 @@
 
 ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/briteblu/joomla-briteblu-mark-as-read?sort=semver&style=for-the-badge) [![GitHub stars](https://img.shields.io/github/stars/briteblu/joomla-briteblu-mark-as-read?style=for-the-badge)](https://github.com/briteblu/joomla-briteblu-mark-as-read/stargazers)
 
+Simple Joomla extension to enable users to mark articles as 'read'.
+
 - [BriteBlu - 'Mark as Read' Joomla component](#briteblu---mark-as-read-joomla-component)
   - [About](#about)
   - [Usage](#usage)
   - [To Do](#to-do)
   - [Changelog](#changelog)
 
-Simple Joomla plugin to enable users to mark articles as 'read'.
-
 ## About
 
-[BriteBlu](https://www.briteblu.com) adds functionality to Joomla (versions 3.9.x)
+[BriteBlu](https://www.briteblu.com) adds functionality to Joomla (versions > 3.8)
 
 There have been Joomla users in the past years asking if a functionality like this exists:
 - Mark a group of articles (place these articles in a category or add a tag to them).
@@ -40,6 +40,15 @@ TODO
 ## Changelog
 
 ### [Unreleased] <!-- omit in toc -->
+
+#### Added <!-- omit in toc -->
+
+- Simple `build.sh` script to generate Joomla package archive from command line
+- Added boilerplate package installer script
+
+#### Changed <!-- omit in toc -->
+
+- Renamed `pkg_script.php` to `package.installer.php`
 
 ### [v0.0.3] - 2021-05-06 <!-- omit in toc -->
 
