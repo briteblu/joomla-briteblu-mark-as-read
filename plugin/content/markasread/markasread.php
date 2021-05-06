@@ -238,8 +238,9 @@ class PlgContentMarkAsRead extends JPlugin
       return;
     }
 
+    $this->_hasBeenRead = self::_hasBeenRead($params, $article->id, $this->_params->user_id);
+    
     if ($this->_debug()) {
-      $this->_hasBeenRead = $this->_hasBeenRead($params, $article->id, $this->_params->user_id);
       if ($this->_hasBeenRead) {
         JFactory::getApplication()->enqueueMessage('DEBUG :: Article has been read');
       } else {

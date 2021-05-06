@@ -34,6 +34,7 @@ TODO
 ## To Do
 
 - Fix github workflow `JXBuild`
+- Adde build scripts for package archive
 
 ## Changelog
 
@@ -46,8 +47,12 @@ TODO
 - Added `js` and `css` folders and files
 - Added frontend plugin template `tmpl/read.php`
 - Changed debug option from list select to radio button group
+- Added `pkg_markasread.xml` package manifest file
+- Added boilerplate package installer script
 
 #### Changed <!-- omit in toc -->
+
+- Changed directory structure for project to house plugin and component in seperate folders
 
 ### [v0.0.2] - 2021-05-05 <!-- omit in toc -->
 
