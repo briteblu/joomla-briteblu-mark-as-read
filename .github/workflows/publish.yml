@@ -1,0 +1,35 @@
+---
+  name: Publish Joomla package
+
+  on:
+    push:
+      tags: [ 'dev-release', 'v*' ]
+      branches: [ disabled ]
+
+  jobs:
+    publish:
+      name: Build Joomla package
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+        - name: Install zip
+          uses: montudor/action-zip@v1
+        - name: Zip Joomla plugin
+          run: zip -qq -r markasread .
+          working-directory: plugins/content/markasread/
+        - name: Move plugin archive
+          run: mv plugins/content/markasread/markasread.zip packages/
+        - name: Zip Joomla package
+          uses: montudor/action-zip@v1
+          with:
+            args: zip -qq -r pkg_markasread.zip pkg_markasread.xml pkg_script.php packages
+        - name: Upload binaries to release
+          uses: svenstaro/upload-release-action@v2
+          with:
+            repo_token: ${{ secrets.GITHUB_TOKEN }}
+            overwrite: true
+            asset_name: pkg_markasread.zip
+            file: pkg_markasread.zip
+            body: ''
+            tag: ${{ github.ref }}

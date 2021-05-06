@@ -19,11 +19,11 @@
  
   <packager>BriteBlu Package Team</packager>
   <packagerurl>https://briteblu.com</packagerurl>
-  <description>BriteBlu - Mark as Read</description>
+  <description>Simple Joomla extension to enable users to mark articles as 'read'</description>
   <!-- <update>http://www.updateurl.com/update</update> -->
 
    <!-- Scripts to run on installation -->
-  <!-- <scriptfile>pkg_script.php</scriptfile> -->
+  <scriptfile>pkg_script.php</scriptfile>
 
   <files folder="packages">
     <!-- <file type="component" id="com_markasread" >com_markasread.zip</file> -->

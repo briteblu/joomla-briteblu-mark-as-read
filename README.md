@@ -1,5 +1,7 @@
 # BriteBlu - 'Mark as Read' Joomla component
 
+![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/briteblu/joomla-briteblu-mark-as-read?sort=semver&style=for-the-badge) [![GitHub stars](https://img.shields.io/github/stars/briteblu/joomla-briteblu-mark-as-read?style=for-the-badge)](https://github.com/briteblu/joomla-briteblu-mark-as-read/stargazers)
+
 - [BriteBlu - 'Mark as Read' Joomla component](#briteblu---mark-as-read-joomla-component)
   - [About](#about)
   - [Usage](#usage)
@@ -33,12 +35,13 @@ TODO
 
 ## To Do
 
-- Fix github workflow `JXBuild`
-- Adde build scripts for package archive
+...
 
 ## Changelog
 
 ### [Unreleased] <!-- omit in toc -->
+
+### [v0.0.3] - 2021-05-06 <!-- omit in toc -->
 
 #### Added <!-- omit in toc -->
 
@@ -49,10 +52,15 @@ TODO
 - Changed debug option from list select to radio button group
 - Added `pkg_markasread.xml` package manifest file
 - Added boilerplate package installer script
+- Added `publish.yml` workflow to publish Joomla package archive when commit gets tagged
 
 #### Changed <!-- omit in toc -->
 
 - Changed directory structure for project to house plugin and component in seperate folders
+
+#### Removed <!-- omit in toc -->
+
+- Removed JXBuild github workflow (see `publish` workflow) and `build.jxb` file
 
 ### [v0.0.2] - 2021-05-05 <!-- omit in toc -->
 
@@ -82,6 +90,7 @@ TODO
 #### Added <!-- omit in toc -->
 - Initial version of `joomla-briteblu-mark-as-read` repository
 
-[Unreleased]: https://github.com/briteblu/joomla-briteblu-mark-as-read/compare/v0.0.2...HEAD
+[Unreleased]: https://github.com/briteblu/joomla-briteblu-mark-as-read/compare/v0.0.3...HEAD
+[v0.0.3]: https://github.com/briteblu/joomla-briteblu-mark-as-read/releases/tag/v0.0.3
 [v0.0.2]: https://github.com/briteblu/joomla-briteblu-mark-as-read/releases/tag/v0.0.2
 [v0.0.1]: https://github.com/briteblu/joomla-briteblu-mark-as-read/releases/tag/v0.0.1
