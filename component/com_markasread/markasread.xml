@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.1" type="component" method="upgrade">
+
+  <name>BriteBlu Mark as Read component</name>
+  <element>com_markasread</element>
+
+  <!-- The following elements are optional and free of formatting constraints -->
+  <creationDate>30-04-2021</creationDate>
+  <author>B. van Wetten (BriteBlu)</author>
+  <authorEmail>info@briteblu.com</authorEmail>
+  <authorUrl>https://briteblu.com</authorUrl>
+  <copyright>(C) 2021 BriteBlu</copyright>
+  <license>MIT; see LICENSE</license>
+
+  <!--  The version string is recorded in the plugins table -->
+  <version>0.0.3</version>
+
+  <!-- The description is optional and defaults to the name -->
+  <description>COM_MARKASREAD_DESCRIPTION</description>
+
+  <!-- Scripts to run on installation -->
+  <scriptfile>markasread.installer.php</scriptfile>
+
+  <!-- Runs on install -->
+  <install>
+    <sql>
+      <file driver="mysql" charset="utf8">sql/install/mysql/mysql.sql</file>
+    </sql>
+  </install>
+
+  <!-- Runs on update -->
+  <update>
+    <schemas>
+      <schemapath type="mysql">sql/updates/mysql</schemapath>
+    </schemas>
+  </update>
+
+  <!-- Runs on uninstall -->
+  <uninstall>
+    <sql>
+      <file driver="mysql" charset="utf8">sql/uninstall/mysql/mysql.sql</file>
+    </sql>
+  </uninstall>
+
+	<!-- Site Main File Copy Section -->
+	<!-- Note the folder attribute: This attribute describes the folder
+		to copy FROM in the package to install therefore files copied
+		in this section are copied from /site/ in the package -->
+	<files folder="site">
+		<filename>index.html</filename>
+	</files>
+
+  <administration>
+    <!-- Administration Menu Section -->
+    <!-- <menu link='index.php?option=com_markasread'>Mark as Read</menu> -->
+    <!-- Administration Main File Copy Section -->
+    <!-- Note the folder attribute: This attribute describes the folder
+      to copy FROM in the package to install therefore files copied
+      in this section are copied from /admin/ in the package -->
+    <files folder="admin">
+      <!-- Admin Main File Copy Section -->
+      <filename>index.html</filename>
+      <folder>language</folder>
+      <folder>sql</folder>
+    </files>
+  </administration>
+
+  <!-- Update servers -->
+  <!-- <updateservers>
+    <server type="extension" priority="1" name="BriteBluMarkAsReadUpdateServer">https://briteblu.com/joomla/markasread_update.xml</server>
+  </updateservers> -->
+</extension>

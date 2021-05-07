@@ -14,12 +14,6 @@
   <!--  The version string is recorded in the plugins table -->
   <version>0.0.3</version>
 
-  <!-- Language files -->
-  <languages folder="language">
-    <language tag="en-GB">en-GB/en-GB.plg_content_markasread.ini</language>
-    <language tag="en-GB">en-GB/en-GB.plg_content_markasread.sys.ini</language>
-  </languages>
-
   <!-- The description is optional and defaults to the name -->
   <description>PLG_CONTENT_MARKASREAD_DESCRIPTION</description>
 
@@ -28,34 +22,12 @@
     <filename>index.html</filename>
     <folder>js</folder>
     <folder>css</folder>
-    <folder>sql</folder>
     <folder>tmpl</folder>
     <folder>language</folder>
   </files>
 
   <!-- Scripts to run on installation -->
   <scriptfile>markasread.installer.php</scriptfile>
-
-  <!-- Runs on install -->
-  <install>
-    <sql>
-      <file driver="mysql" charset="utf8">sql/install/mysql/mysql.sql</file>
-    </sql>
-  </install>
-
-  <!-- Runs on update -->
-  <update>
-    <schemas>
-      <schemapath type="mysql">sql/updates/mysql</schemapath>
-    </schemas>
-  </update>
-
-  <!-- Runs on uninstall -->
-  <uninstall>
-    <sql>
-      <file driver="mysql" charset="utf8">sql/uninstall/mysql/mysql.sql</file>
-    </sql>
-  </uninstall>
 
   <!-- Config parameters -->
   <config>

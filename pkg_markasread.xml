@@ -27,7 +27,7 @@
   <!-- List of extensions to install -->
   <files folder="packages">
       <!-- Component -->
-      <!-- <file type="component" id="com_markasread" >com_markasread.zip</file> -->
+      <file type="component" id="com_markasread">com_markasread.zip</file>
 
       <!-- Plugins: markasread -->
       <file type="plugin" id="markasread" group="content">plg_content_markasread.zip</file>

@@ -44,11 +44,13 @@ TODO
 #### Added <!-- omit in toc -->
 
 - Simple `build.sh` script to generate Joomla package archive from command line
-- Added boilerplate package installer script
+- Created boilerplate component folder structure and manifest file
 
 #### Changed <!-- omit in toc -->
 
+- Moved SQL database scripts from plugin to component
 - Renamed `pkg_script.php` to `package.installer.php`
+- Removed language tag from plugin manifest file - redundant
 
 ### [v0.0.3] - 2021-05-06 <!-- omit in toc -->
 
