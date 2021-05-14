@@ -45,6 +45,9 @@ TODO
 
 - Simple `build.sh` script to generate Joomla package archive from command line
 - Created boilerplate component folder structure and manifest file
+- Added CSRF protection in plugin view
+- Added language support to plugin view template
+- Added controller task to mark article as read
 
 #### Changed <!-- omit in toc -->
 
