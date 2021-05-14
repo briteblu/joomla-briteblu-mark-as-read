@@ -4,6 +4,7 @@
   <blockChildUninstall>true</blockChildUninstall>
 
   <name>BriteBlu Mark as Read package</name>
+  <name>PKG_MARKASREAD_NAME</name>
   <packagename>markasread</packagename>
 
   <!-- The following elements are optional and free of formatting constraints -->

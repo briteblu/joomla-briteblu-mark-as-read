@@ -14,7 +14,7 @@ Simple Joomla extension to enable users to mark articles as 'read'.
 
 [BriteBlu](https://www.briteblu.com) adds functionality to Joomla (versions > 3.8)
 
-There have been Joomla users in the past years asking if a functionality like this exists:
+In the past there have been Joomla users asking if functionality like this exists:
 - Mark a group of articles (place these articles in a category or add a tag to them).
 - Have logged in users read these articles from a page marked as 'important stuff' or 'must read items'.
 - Offer each logged-in user the ability to 'mark' an article as 'read' (or even 'partly read', as extra options) which will then remove the article from this page listing.
