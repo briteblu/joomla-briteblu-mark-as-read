@@ -51,6 +51,8 @@ TODO
 - Moved SQL database scripts from plugin to component
 - Renamed `pkg_script.php` to `package.installer.php`
 - Removed language tag from plugin manifest file - redundant
+- Do not run plugin when user is not logged in (i.e. guest)
+- Throw Runtime exception from component when user is not logged in (i.e. guest)
 
 ### [v0.0.3] - 2021-05-06 <!-- omit in toc -->
 
