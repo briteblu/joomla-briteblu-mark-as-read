@@ -66,11 +66,11 @@ class PlgContentMarkAsRead extends JPlugin
     $this->_plugin = JPluginHelper::getPlugin('content', self::PLUGIN_NAME);
     $this->_params = new JRegistry($this->_plugin->params);
 
-		// Init folder structure
-		$this->_initFolders();
+    // Init folder structure
+    $this->_initFolders();
 
     // Add current user id to plugin parameters
-    $this->_params->user_id = Factory::getUser()->id;
+    $this->_params->user = Factory::getUser();
 
     // Load plugin css & scripts
     $document = Factory::getDocument();
@@ -190,6 +190,12 @@ class PlgContentMarkAsRead extends JPlugin
    */
   public function onContentBeforeDisplay($context, &$article, &$params, $page = 0)
   {
+    // Don't run if there user is not logged in (i.e. guest)
+    if ($this->_params->user->guest !== 0 || $this->_params->user->id === 0)
+    {
+      return;
+    }
+
     // Validate context
     if (!$this->_validateContext($context))
     {
@@ -211,6 +217,12 @@ class PlgContentMarkAsRead extends JPlugin
    */
   public function onContentAfterDisplay($context, &$article, &$params, $page = 0)
   {
+    // Don't run if there user is not logged in (i.e. guest)
+    if ($this->_params->user->guest !== 0 || $this->_params->user->id === 0)
+    {
+      return;
+    }
+
     // Validate context
     if (!$this->_validateContext($context))
     {
@@ -238,7 +250,7 @@ class PlgContentMarkAsRead extends JPlugin
       return;
     }
 
-    $this->_hasBeenRead = self::_hasBeenRead($params, $article->id, $this->_params->user_id);
+    $this->_hasBeenRead = self::_hasBeenRead($params, $article->id, $this->_params->user->id);
     
     if ($this->_debug()) {
       if ($this->_hasBeenRead) {

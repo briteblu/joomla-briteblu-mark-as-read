@@ -3,7 +3,8 @@
 
   <blockChildUninstall>true</blockChildUninstall>
 
-  <name>Package - BriteBlu - Mark as Read</name>
+  <name>BriteBlu Mark as Read package</name>
+  <name>PKG_MARKASREAD_NAME</name>
   <packagename>markasread</packagename>
 
   <!-- The following elements are optional and free of formatting constraints -->
@@ -14,19 +15,23 @@
   <copyright>(C) 2021 BriteBlu</copyright>
   <license>MIT; see LICENSE</license>
  
-   <!--  version -->
-  <version>0.0.1</version>
+  <!--  version -->
+  <version>0.0.3</version>
  
   <packager>BriteBlu Package Team</packager>
   <packagerurl>https://briteblu.com</packagerurl>
-  <description>Simple Joomla extension to enable users to mark articles as 'read'</description>
-  <!-- <update>http://www.updateurl.com/update</update> -->
+  <description>Joomla package for BriteBlu - Mark as Read</description>
 
-   <!-- Scripts to run on installation -->
-  <scriptfile>pkg_script.php</scriptfile>
+  <!-- Scripts to run on installation -->
+  <scriptfile>package.installer.php</scriptfile>
 
+  <!-- List of extensions to install -->
   <files folder="packages">
-    <!-- <file type="component" id="com_markasread" >com_markasread.zip</file> -->
-    <file type="plugin" id="markasread" group="content">markasread.zip</file>
+      <!-- Component -->
+      <file type="component" id="com_markasread">com_markasread.zip</file>
+
+      <!-- Plugins: markasread -->
+      <file type="plugin" id="markasread" group="content">plg_content_markasread.zip</file>
   </files>
+
 </extension>

@@ -2,19 +2,19 @@
 
 ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/briteblu/joomla-briteblu-mark-as-read?sort=semver&style=for-the-badge) [![GitHub stars](https://img.shields.io/github/stars/briteblu/joomla-briteblu-mark-as-read?style=for-the-badge)](https://github.com/briteblu/joomla-briteblu-mark-as-read/stargazers)
 
+Simple Joomla extension to enable users to mark articles as 'read'.
+
 - [BriteBlu - 'Mark as Read' Joomla component](#briteblu---mark-as-read-joomla-component)
   - [About](#about)
   - [Usage](#usage)
   - [To Do](#to-do)
   - [Changelog](#changelog)
 
-Simple Joomla plugin to enable users to mark articles as 'read'.
-
 ## About
 
-[BriteBlu](https://www.briteblu.com) adds functionality to Joomla (versions 3.9.x)
+[BriteBlu](https://www.briteblu.com) adds functionality to Joomla (versions > 3.8)
 
-There have been Joomla users in the past years asking if a functionality like this exists:
+In the past there have been Joomla users asking if functionality like this exists:
 - Mark a group of articles (place these articles in a category or add a tag to them).
 - Have logged in users read these articles from a page marked as 'important stuff' or 'must read items'.
 - Offer each logged-in user the ability to 'mark' an article as 'read' (or even 'partly read', as extra options) which will then remove the article from this page listing.
@@ -40,6 +40,17 @@ TODO
 ## Changelog
 
 ### [Unreleased] <!-- omit in toc -->
+
+#### Added <!-- omit in toc -->
+
+- Simple `build.sh` script to generate Joomla package archive from command line
+- Created boilerplate component folder structure and manifest file
+
+#### Changed <!-- omit in toc -->
+
+- Moved SQL database scripts from plugin to component
+- Renamed `pkg_script.php` to `package.installer.php`
+- Removed language tag from plugin manifest file - redundant
 
 ### [v0.0.3] - 2021-05-06 <!-- omit in toc -->
 

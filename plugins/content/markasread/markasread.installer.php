@@ -1,6 +1,6 @@
 <?php
 /**
- * @version     $Id: markasread.php 04-05-2021 B. van Wetten $
+ * @version     $Id: markasread.installer.php 04-05-2021 B. van Wetten $
  * @package     Joomla.Plugin
  * @subpackage  Content.markasread
  *
@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
 /**
  * Installer script file.
  *
- * @package   MarkAsRead
+ * @package   markasread
  * @since     0.0.1
  */
 class PlgContentMarkAsReadInstallerScript
