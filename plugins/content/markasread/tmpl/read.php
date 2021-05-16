@@ -30,11 +30,16 @@ $lang = JFactory::getLanguage();
 <!-- <div class="container__corner container__corner--tr"></div> -->
 <div class="btn-group pull-right">
   <form method="post" action="<?php echo htmlspecialchars($uri->toString(), ENT_COMPAT, 'UTF-8'); ?>" class="form-inline">
-    <button type="submit" class="btn btn-light" <?php if ($this->_hasBeenRead) { echo 'disabled'; } ?>><span class="icon-checkmark" aria-hidden="true"></span></button>
+    <?php if ($this->_hasBeenRead) { ?>
+      <button type="submit" class="btn btn-light"><span class="icon-eye-close" aria-hidden="true"></span></button>
+      <input type="hidden" name="task" value="unread" />
+    <?php } else { ?>
+      <button type="submit" class="btn btn-light"><span class="icon-eye-open" aria-hidden="true"></span></button>
+      <input type="hidden" name="task" value="read" />
+    <?php } ?>
     <input type="hidden" name="url" value="<?php echo htmlspecialchars($uri->toString(), ENT_COMPAT, 'UTF-8'); ?>" />
     <input type="hidden" name="article" value="<?=$article->id?>" />
     <input type="hidden" name="option" value="com_markasread" />
-    <input type="hidden" name="task" value="read" />
     <?php echo JHtml::_( 'form.token' ); ?>
 </form>
 </div>

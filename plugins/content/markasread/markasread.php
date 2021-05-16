@@ -69,7 +69,7 @@ class PlgContentMarkAsRead extends JPlugin
     $this->_params = new JRegistry($this->_plugin->params);
 
     // Init folder structure
-    $this->_initFolders();
+    $this->initFolders();
 
     // Add current user id to plugin parameters
     $this->_params->user = Factory::getUser();
@@ -87,7 +87,7 @@ class PlgContentMarkAsRead extends JPlugin
    *
    * @return  boolean
    */
-  private function _validateContext($context)
+  private function validateContext($context)
   {
     return in_array($context, $this->_validContexts);
   }
@@ -97,7 +97,7 @@ class PlgContentMarkAsRead extends JPlugin
    *
    * @return void
    */
-  private function _initFolders()
+  private function initFolders()
   {
     // URLs
     $this->_urlPlugin    = JURI::root() . "plugins/content/" . self::PLUGIN_NAME;
@@ -110,7 +110,7 @@ class PlgContentMarkAsRead extends JPlugin
    *
    * @return  boolean	True when debugging mode is enabled for plugin.
    */
-  private function _debug()
+  private function debug()
   {
     return $this->_params->get('debug', 'disabled') === 'enabled';
   }
@@ -153,7 +153,7 @@ class PlgContentMarkAsRead extends JPlugin
    *
    * @return  mixed    true if there is an error. Void otherwise.
    */
-  private function _modifyContent(&$article, &$params)
+  private function modifyContent(&$article, &$params)
   {
     return;
   }
@@ -199,7 +199,7 @@ class PlgContentMarkAsRead extends JPlugin
     }
 
     // Validate context
-    if (!$this->_validateContext($context))
+    if (!$this->validateContext($context))
     {
       return false;
     }
@@ -226,7 +226,7 @@ class PlgContentMarkAsRead extends JPlugin
     }
 
     // Validate context
-    if (!$this->_validateContext($context))
+    if (!$this->validateContext($context))
     {
       return;
     }
@@ -247,14 +247,14 @@ class PlgContentMarkAsRead extends JPlugin
   public function onContentPrepare($context, &$article, &$params, $page = 0)
   {
     // Validate context
-    if (!$this->_validateContext($context))
+    if (!$this->validateContext($context))
     {
       return;
     }
 
     $this->_hasBeenRead = self::_hasBeenRead($params, $article->id, $this->_params->user->id);
     
-    if ($this->_debug()) {
+    if ($this->debug()) {
       if ($this->_hasBeenRead) {
         JFactory::getApplication()->enqueueMessage('DEBUG :: Article has been read');
       } else {
@@ -264,9 +264,9 @@ class PlgContentMarkAsRead extends JPlugin
     
     if (is_object($article))
     {
-      return $this->_modifyContent($article->text, $params);
+      return $this->modifyContent($article->text, $params);
     }
 
-    return $this->_modifyContent($article, $params);
+    return $this->modifyContent($article, $params);
   }
 }

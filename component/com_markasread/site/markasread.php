@@ -22,7 +22,7 @@ JLoader::register('MarkAsReadHelperRoute', JPATH_SITE . '/components/com_markasr
 
 // Get an instance of the controller prefixed by HelloWorld
 $controller = JControllerLegacy::getInstance('markasread');
-$controller->registerDefaultTask('markread');
+$controller->registerDefaultTask('read');
 
 $controller->execute($input->getCmd('task'));
 

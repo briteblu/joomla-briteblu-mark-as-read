@@ -42,8 +42,59 @@ class MarkasreadController extends JControllerLegacy
       ->columns(array($db->quoteName('content_id'), $db->quoteName('user_id')))
       ->values(implode(',', array((int) $article_id, (int) $user->id)));
 
+    // Set the query and execute the insert.
+    // If the record exists, just update the `modified` field
+    $db->setQuery($query . " ON DUPLICATE KEY UPDATE `modified`=NOW()");
+    
+    try
+    {
+      $db->execute();
+    }
+    catch (RuntimeException $e)
+    {
+      JError::raiseWarning(500, $e->getMessage());
       
-      // Set the query and execute the insert.
+      return false;
+    }
+
+    // Don't redirect to an external URL.
+    if (!JUri::isInternal($url))
+    {
+      $url = JRoute::_('index.php');
+    }
+
+    $this->setRedirect($url);
+  }
+
+  /**
+   * TODO
+   *
+   * @return  void
+   */
+  public function unread()
+  {
+    // Check for request forgeries.
+    $this->checkToken();
+
+    // Perform the Request task
+    $input = JFactory::getApplication()->input;
+    $user  = JFactory::getUser();
+    $url = $this->input->getString('url', '');
+    $article_id = $this->input->getInt('article', null);
+
+    $db = JFactory::getDbo();
+    $query = $db->getQuery(true);
+
+    // Prepare conditions for DELETE query
+    $conditions = array(
+      $db->quoteName('content_id') . ' = ' . (int) $article_id, 
+      $db->quoteName('user_id') . ' = ' . (int) $user->id
+    );
+
+    $query->delete($db->quoteName('#__markasread'));
+    $query->where($conditions);
+      
+    // Set the query and execute the insert.
     $db->setQuery($query);
     
     try
@@ -57,6 +108,12 @@ class MarkasreadController extends JControllerLegacy
       return false;
     }
 
-    $this->setRedirect('http://localhost/index.php');
+    // Don't redirect to an external URL.
+    if (!JUri::isInternal($url))
+    {
+      $url = JRoute::_('index.php');
+    }
+
+    $this->setRedirect($url);
   }
 }

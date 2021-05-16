@@ -48,12 +48,16 @@ TODO
 - Added CSRF protection in plugin view
 - Added language support to plugin view template
 - Added controller task to mark article as read
+- Added `unread` controller task to mark article as unread
+- Added button to plugin view to mark a read article as unread
 
 #### Changed <!-- omit in toc -->
 
 - Moved SQL database scripts from plugin to component
 - Renamed `pkg_script.php` to `package.installer.php`
 - Removed language tag from plugin manifest file - redundant
+- Rename plugin private methods (removed underscore)
+- Improved controller `read` task to update the record if it already exists
 
 ### [v0.0.3] - 2021-05-06 <!-- omit in toc -->
 
