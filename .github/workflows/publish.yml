@@ -12,7 +12,7 @@
       runs-on: ubuntu-latest
       steps:
         - name: Checkout
-          uses: actions/checkout@v2
+          uses: actions/checkout@v2.3.4
         - name: Install zip
           uses: montudor/action-zip@v1
         - name: Zip Joomla plugin
@@ -25,7 +25,7 @@
           with:
             args: zip -qq -r pkg_markasread.zip pkg_markasread.xml package.installer.php packages
         - name: Upload binaries to release
-          uses: svenstaro/upload-release-action@v2
+          uses: svenstaro/upload-release-action@2.2.1
           with:
             repo_token: ${{ secrets.GITHUB_TOKEN }}
             overwrite: true
