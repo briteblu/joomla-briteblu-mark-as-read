@@ -40,8 +40,9 @@ class PlgContentMarkAsRead extends JPlugin
    *
    * @var  array
    */
-  private $_validContexts = array(
-    'com_content.article'
+  private $validContexts = array(
+    'com_content.article',
+    'com_content.category'
   );
 
   /**
@@ -74,6 +75,9 @@ class PlgContentMarkAsRead extends JPlugin
     // Add current user id to plugin parameters
     $this->_params->user = Factory::getUser();
 
+    // Load jQuery
+    JHtml::_('jquery.framework');
+
     // Load plugin css & scripts
     $document = Factory::getDocument();
     $document->addStyleSheet($this->_urlPluginCss . "/style.css", array('version'=>'auto'));
@@ -89,7 +93,7 @@ class PlgContentMarkAsRead extends JPlugin
    */
   private function validateContext($context)
   {
-    return in_array($context, $this->_validContexts);
+    return in_array($context, $this->validContexts);
   }
 
   /**
@@ -124,7 +128,7 @@ class PlgContentMarkAsRead extends JPlugin
    *
    * @return  boolean	True on when article has been read.
    */
-  private static function _hasBeenRead(&$params, $article_id, $user_id)
+  private static function hasBeenRead(&$params, $article_id, $user_id)
   {
     $db = JFactory::getDbo();
     $query = $db->getQuery(true);
@@ -167,7 +171,7 @@ class PlgContentMarkAsRead extends JPlugin
    *
    * @return  string|boolean  HTML string containing code for the mark as read toggle if in com_content else boolean false
    */
-  private function _displayMarkAsRead($context, &$article, &$params, $page)
+  private function displayMarkAsRead($context, &$article, &$params, $page)
   {
     // Get the path for the rating summary layout file
     $path = JPluginHelper::getLayoutPath('content', 'markasread', 'read');
@@ -204,7 +208,7 @@ class PlgContentMarkAsRead extends JPlugin
       return false;
     }
 
-    return $this->_displayMarkAsRead($context, $article, $params, $page);
+    return $this->displayMarkAsRead($context, $article, $params, $page);
   }
 
   /**
@@ -252,10 +256,10 @@ class PlgContentMarkAsRead extends JPlugin
       return;
     }
 
-    $this->_hasBeenRead = self::_hasBeenRead($params, $article->id, $this->_params->user->id);
+    $this->hasBeenRead = self::hasBeenRead($params, $article->id, $this->_params->user->id);
     
     if ($this->debug()) {
-      if ($this->_hasBeenRead) {
+      if ($this->hasBeenRead) {
         JFactory::getApplication()->enqueueMessage('DEBUG :: Article has been read');
       } else {
         JFactory::getApplication()->enqueueMessage('DEBUG :: Article has not been read');

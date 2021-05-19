@@ -1,30 +1,34 @@
 <?php
 /**
- * @package     Joomla.Site
- * @subpackage  com_markasread
+ * TODO
  *
- * @copyright   Copyright (C) 2005 - 2018 Open Source Matters, Inc. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @package Markasread
+ * @author B. van Wetten <bas@vanwetten.com>
+ * @copyright 2021 BriteBlu
+ * @license MIT https://opensource.org/licenses/MIT
  */
 
 // No direct access to this file
 defined('_JEXEC') or die;
 
-// Perform the Request task
-$input = JFactory::getApplication()->input;
+/** @var \Joomla\CMS\Application\CMSApplication $app */
+$app = JFactory::getApplication();
+$app->allowCache(false);
+
+// Prevent the api url from being indexed
+$app->setHeader('X-Robots-Tag', 'noindex, nofollow');
+
+// JInput object
+$input = $app->input;
 $user  = JFactory::getUser();
 
-if($user->guest === 1){
-  throw new RuntimeException(JText::sprintf('COM_MARKASREAD_USERNOTLOGGEDIN'), 500);
+if ($user->guest === 1 || $user->id === 0)
+{
+	throw new RuntimeException(JText::sprintf('COM_MARKASREAD_USERNOTLOGGEDIN'), 500);
 }
 
 JLoader::register('MarkAsReadHelperRoute', JPATH_SITE . '/components/com_markasread/helpers/route.php');
 
-// Get an instance of the controller prefixed by HelloWorld
 $controller = JControllerLegacy::getInstance('markasread');
-$controller->registerDefaultTask('read');
 
 $controller->execute($input->getCmd('task'));
-
-// Redirect if set by the controller
-$controller->redirect();

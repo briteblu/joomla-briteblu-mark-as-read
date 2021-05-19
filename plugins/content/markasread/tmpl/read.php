@@ -1,13 +1,11 @@
 <?php
 /**
- * @version     $Id: markasread.php 04-05-2021 B. van Wetten $
- * @package     Joomla.Plugin
- * @subpackage  Content.markasread
+ * TODO
  *
- * @author      B. van Wetten <info@briteblu.com>
- * @copyright   2021 (c) BriteBlu.
- * @license     MIT; see LICENSE
- * @link        https://briteblu.com
+ * @package Markasread
+ * @author B. van Wetten <bas@vanwetten.com>
+ * @copyright 2021 BriteBlu
+ * @license MIT https://opensource.org/licenses/MIT
  */
 
 defined('_JEXEC') or die;
@@ -28,18 +26,16 @@ $lang = JFactory::getLanguage();
 ?>
 <!-- Top-right corner -->
 <!-- <div class="container__corner container__corner--tr"></div> -->
+<?php // @codingStandardsIgnoreStart ?>
 <div class="btn-group pull-right">
-  <form method="post" action="<?php echo htmlspecialchars($uri->toString(), ENT_COMPAT, 'UTF-8'); ?>" class="form-inline">
-    <?php if ($this->_hasBeenRead) { ?>
-      <button type="submit" class="btn btn-light"><span class="icon-eye-close" aria-hidden="true"></span></button>
-      <input type="hidden" name="task" value="unread" />
-    <?php } else { ?>
-      <button type="submit" class="btn btn-light"><span class="icon-eye-open" aria-hidden="true"></span></button>
-      <input type="hidden" name="task" value="read" />
-    <?php } ?>
-    <input type="hidden" name="url" value="<?php echo htmlspecialchars($uri->toString(), ENT_COMPAT, 'UTF-8'); ?>" />
-    <input type="hidden" name="article" value="<?=$article->id?>" />
-    <input type="hidden" name="option" value="com_markasread" />
-    <?php echo JHtml::_( 'form.token' ); ?>
+	<form id="markasread_form_<?=$article->id?>" method="post" action="<?=htmlspecialchars($uri->toString(), ENT_COMPAT, 'UTF-8'); ?>" class="form-inline markasread_form <?=$this->hasBeenRead ? 'read' : 'unread'?>">
+		<button type="button" class="btn btn-light" value="<?=$article->id?>" title="<?=$this->hasBeenRead ? 'Unmark' : 'Mark' ?> as read"><span class="icon-eye-<?=$this->hasBeenRead ? 'close' : 'open'?>" aria-hidden="true"></span></button>
+		<input type="hidden" name="task" value="<?=$this->hasBeenRead ? 'unread' : 'read'?>" />
+		<input type="hidden" name="url" value="<?=htmlspecialchars($uri->toString(), ENT_COMPAT, 'UTF-8'); ?>" />
+		<input type="hidden" name="article" value="<?= $article->id ?>" />
+		<input type="hidden" name="format" value="json" />
+		<input type="hidden" name="option" value="com_markasread" />
+		<?php echo JHtml::_( 'form.token' ); ?>
 </form>
 </div>
+<?php // @codingStandardsIgnoreEnd ?>
