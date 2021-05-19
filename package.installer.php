@@ -17,9 +17,25 @@ defined('_JEXEC') or die;
  */
 class pkg_markasreadInstallerScript {
 
-  public function uninstall($parent) { }
+	public function update($parent) { }
 
-  public function preflight($type, $parent) { }
+	public function install($parent) { }
 
-  public function uninstallLanguage($tag, $name) { }
+	public function uninstall($parent) { }
+
+	public function preflight($type, $parent) { }
+
+	public function postflight($type, $parent)
+	{
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		$query->update('#__extensions')
+					->set('enabled=1')
+					->where('element=' . $db->quote('markasread'))
+					->where('type=' . $db->quote('plugin'))
+					->where('folder=' . $db->quote('content'));
+			$db->setQuery($query)->execute();
+	}
+
+	public function uninstallLanguage($tag, $name) { }
 }
