@@ -16,10 +16,15 @@
         - name: Install zip
           uses: montudor/action-zip@v1
         - name: Zip Joomla plugin
-          run: zip -qq -r markasread .
+          run: zip -qq -r plg_content_markasread .
           working-directory: plugins/content/markasread/
         - name: Move plugin archive
-          run: mv plugins/content/markasread/markasread.zip packages/
+          run: mv plugins/content/markasread/plg_content_markasread.zip packages/
+        - name: Zip Joomla component
+          run: zip -qq -r com_markasread .
+          working-directory: component/com_markasread
+        - name: Move plugin archive
+          run: mv component/com_markasread/com_markasread.zip packages/
         - name: Zip Joomla package
           uses: montudor/action-zip@v1
           with:
