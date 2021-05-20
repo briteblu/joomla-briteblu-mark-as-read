@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="3.1" type="plugin" group="content" method="upgrade">
 
-  <name>BriteBlu Mark as Read plugin</name>
+  <name>plg_content_markasread</name>
+  <element>markasread</element>
 
   <!-- The following elements are optional and free of formatting constraints -->
   <creationDate>30-04-2021</creationDate>
@@ -15,7 +16,7 @@
   <version>0.0.3</version>
 
   <!-- The description is optional and defaults to the name -->
-  <description>PLG_CONTENT_MARKASREAD_DESCRIPTION</description>
+  <description>PLG_CONTENT_MARKASREAD_XML_DESCRIPTION</description>
 
   <files>
     <filename plugin="markasread">markasread.php</filename>

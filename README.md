@@ -41,6 +41,11 @@ TODO
 
 ### [Unreleased] <!-- omit in toc -->
 
+### Fixed <!-- omit in toc -->
+
+- Fixed `build.sh` script; `pkg_script` ==> `package.installer.php`
+- Renamed plugin and component names in the backend adhering to Joomla! best practices
+
 #### Added <!-- omit in toc -->
 
 - Simple `build.sh` script to generate Joomla package archive from command line
@@ -60,6 +65,7 @@ TODO
 - Throw Runtime exception from component when user is not logged in (i.e. guest)
 - Rename plugin private methods (removed underscore)
 - Improved controller `read` task to update the record if it already exists
+- Removed `packages` folder from repository and added to `.gitignore`
 
 ### [v0.0.3] - 2021-05-06 <!-- omit in toc -->
 

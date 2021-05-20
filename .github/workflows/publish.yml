@@ -15,6 +15,8 @@
           uses: actions/checkout@v2.3.4
         - name: Install zip
           uses: montudor/action-zip@v1
+        - name: Create package dir
+          run: mkdir -p packages
         - name: Zip Joomla plugin
           run: zip -qq -r plg_content_markasread .
           working-directory: plugins/content/markasread/
