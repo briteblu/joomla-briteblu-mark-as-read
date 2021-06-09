@@ -23,4 +23,10 @@ zip -qq -r plg_content_markasread .
 mv plg_content_markasread.zip "${PACKAGE_DIR}"
 cd "${CURRENT_DIR}"
 
+# Create plugin archive
+cd plugins/system/markasread_filter
+zip -qq -r plg_system_markasread_filter .
+mv plg_system_markasread_filter.zip "${PACKAGE_DIR}"
+cd "${CURRENT_DIR}"
+
 zip -qq -r pkg_markasread pkg_markasread.xml package.installer.php packages

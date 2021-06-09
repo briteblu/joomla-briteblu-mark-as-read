@@ -8,8 +8,6 @@
  * @license MIT https://opensource.org/licenses/MIT
  */
 
-defined('_JEXEC') or die;
-
 /**
  * Layout variables
  * -----------------
@@ -20,6 +18,10 @@ defined('_JEXEC') or die;
  * @var   string   $path      Path to this file
  */
 
+defined('_JEXEC') or die;
+
+JHtml::_('bootstrap.tooltip');
+
 $uri = clone JUri::getInstance();
 $lang = JFactory::getLanguage();
 
@@ -29,7 +31,7 @@ $lang = JFactory::getLanguage();
 <?php // @codingStandardsIgnoreStart ?>
 <div class="btn-group pull-right">
 	<form id="markasread_form_<?=$article->id?>" method="post" action="<?=htmlspecialchars($uri->toString(), ENT_COMPAT, 'UTF-8'); ?>" class="form-inline markasread_form <?=$this->hasBeenRead ? 'read' : 'unread'?>">
-		<button type="button" class="btn btn-light" value="<?=$article->id?>" title="<?=$this->hasBeenRead ? 'Unmark' : 'Mark' ?> as read"><span class="icon-eye-<?=$this->hasBeenRead ? 'close' : 'open'?>" aria-hidden="true"></span></button>
+		<button type="button" data-toggle="tooltip" data-placement="top" class="btn btn-light hasTooltip" value="<?=$article->id?>" title="Toggle read/unread"><span class="icon-eye-<?=$this->hasBeenRead ? 'close' : 'open'?>" aria-hidden="true"></span></button>
 		<input type="hidden" name="task" value="<?=$this->hasBeenRead ? 'unread' : 'read'?>" />
 		<input type="hidden" name="url" value="<?=htmlspecialchars($uri->toString(), ENT_COMPAT, 'UTF-8'); ?>" />
 		<input type="hidden" name="article" value="<?= $article->id ?>" />

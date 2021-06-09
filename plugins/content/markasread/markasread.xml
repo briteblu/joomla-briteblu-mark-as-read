@@ -19,13 +19,19 @@
   <description>PLG_CONTENT_MARKASREAD_XML_DESCRIPTION</description>
 
   <files>
-    <filename plugin="markasread">markasread.php</filename>
     <filename>index.html</filename>
     <folder>js</folder>
     <folder>css</folder>
     <folder>tmpl</folder>
     <folder>language</folder>
+    <folder>markasread</folder>
+    <filename plugin="markasread">markasread.php</filename>
   </files>
+
+  <!-- Media files to install -->
+	<media folder="media" destination="plg_content_markasread/images">
+		<filename>markasread_logo.png</filename>
+	</media>
 
   <!-- Scripts to run on installation -->
   <scriptfile>markasread.installer.php</scriptfile>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form name="params">
+  <fields name="attribs">
+    <fieldset name="markasread" label="Mark as Read" description="Mark as Read description">
+      <field
+        name="article_read_label"
+        type="text"
+        label="Mark as read" />
+      <field
+        name="article_read"
+        type="checkbox"
+        label="Read"
+        filter="boolean" />
+    </fieldset>
+  </fields>
+</form>

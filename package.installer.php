@@ -27,6 +27,7 @@ class pkg_markasreadInstallerScript {
 
 	public function postflight($type, $parent)
 	{
+		// Enabled Content.markasread plugin after installation
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
 		$query->update('#__extensions')
@@ -34,7 +35,16 @@ class pkg_markasreadInstallerScript {
 					->where('element=' . $db->quote('markasread'))
 					->where('type=' . $db->quote('plugin'))
 					->where('folder=' . $db->quote('content'));
-			$db->setQuery($query)->execute();
+		$db->setQuery($query)->execute();
+
+		// Enabled System.markasread_filter plugin after installation
+		$query = $db->getQuery(true);
+		$query->update('#__extensions')
+					->set('enabled=1')
+					->where('element=' . $db->quote('markasread_filter'))
+					->where('type=' . $db->quote('plugin'))
+					->where('folder=' . $db->quote('system'));
+		$db->setQuery($query)->execute();
 	}
 
 	public function uninstallLanguage($tag, $name) { }

@@ -32,9 +32,38 @@ class MarkasreadController extends JControllerLegacy
 	public function __construct($config = array())
 	{
 		// Get a handle to the Joomla! application object
-		$this->application = JFactory::getApplication();
+		$this->app = JFactory::getApplication();
+
+		$this->input = $this->app->input;
 
 		parent::__construct($config);
+	}
+
+	/**
+	 * Method to display a view.
+	 *
+	 * @param   boolean  $cachable   If true, the view output will be cached.
+	 * @param   boolean  $urlparams  An array of safe URL parameters and their variable types, for valid values see {@link JFilterInput::clean()}.
+	 *
+	 * @return  JController  This object to support chaining.
+	 *
+	 * @since   1.5
+	 */
+	public function display($cachable = false, $urlparams = false)
+	{
+		$cachable = true;
+
+		/**
+		 * Set the default view name and format from the Request.
+		 * Note we are using a_id to avoid collisions with the router and the return page.
+		 * Frontend is a bit messier than the backend.
+		 */
+		$vName = $this->input->getCmd('view', 'articles');
+		$this->input->set('view', $vName);
+
+		parent::display($cachable, null);
+
+		return $this;
 	}
 
 	/**
@@ -47,11 +76,21 @@ class MarkasreadController extends JControllerLegacy
 		// Check for request forgeries.
 		$this->checkToken();
 
+		// Prevent the api url from being indexed
+		$this->app->allowCache(false);
+		$this->app->setHeader('X-Robots-Tag', 'noindex, nofollow');
+
 		// Perform the Request task
-		$input = $this->application->input;
+		$input = $this->app->input;
 		$user  = JFactory::getUser();
-		$url = $this->input->getString('url', '');
-		$articleId = $this->input->getInt('article', null);
+		$url = $input->getString('url', '');
+		$articleId = $input->getInt('article', null);
+
+		if ($user->guest === 1 || $user->id === 0)
+		{
+			echo new JResponseJson(JText::sprintf('COM_MARKASREAD_USERNOTLOGGEDIN'), null, true);
+			// throw new RuntimeException(JText::sprintf('COM_MARKASREAD_USERNOTLOGGEDIN'), 500);
+		}
 
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
@@ -86,11 +125,20 @@ class MarkasreadController extends JControllerLegacy
 		// Check for request forgeries.
 		$this->checkToken();
 
+		// Prevent the api url from being indexed
+		$this->app->allowCache(false);
+		$this->app->setHeader('X-Robots-Tag', 'noindex, nofollow');
+
 		// Perform the Request task
-		$input = JFactory::getApplication()->input;
 		$user  = JFactory::getUser();
-		$url = $this->input->getString('url', '');
-		$articleId = $this->input->getInt('article', null);
+		$input = $this->app->input;
+		$url = $input->getString('url', '');
+		$articleId = $input->getInt('article', null);
+
+		if ($user->guest === 1 || $user->id === 0)
+		{
+			echo new JResponseJson(JText::sprintf('COM_MARKASREAD_USERNOTLOGGEDIN'), null, true);
+		}
 
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);

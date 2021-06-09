@@ -31,8 +31,9 @@
       <!-- Component -->
       <file type="component" id="com_markasread">com_markasread.zip</file>
 
-      <!-- Plugins: markasread -->
+      <!-- Plugins -->
       <file type="plugin" id="markasread" group="content">plg_content_markasread.zip</file>
+      <file type="plugin" id="markasread_filter" group="system">plg_system_markasread_filter.zip</file>
   </files>
 
 </extension>
